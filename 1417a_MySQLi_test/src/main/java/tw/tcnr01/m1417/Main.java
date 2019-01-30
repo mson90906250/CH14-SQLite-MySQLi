@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import android.os.Handler;
+import android.os.StrictMode;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -31,8 +32,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -40,7 +45,7 @@ import tw.tcnr01.m1417.providers.FriendsContentProvider;
 
 
 public class Main extends AppCompatActivity implements View.OnClickListener {
-    String TAG = "oldpa=";
+    String TAG = "tcnr01=>";
     private TextView count_t;
     private EditText e001, e002, e003, e004;
 
@@ -94,6 +99,27 @@ public class Main extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         setupViewComponent();
+
+        //-------------抓取遠端資料庫設定執行續------------------------------
+        StrictMode.setThreadPolicy(new
+                StrictMode.
+                        ThreadPolicy.Builder().
+                detectDiskReads().
+                detectDiskWrites().
+                detectNetwork().
+                penaltyLog().
+                build());
+        StrictMode.setVmPolicy(
+                new
+                        StrictMode.
+                                VmPolicy.
+                                Builder().
+                        detectLeakedSqlLiteObjects().
+                        penaltyLog().
+                        penaltyDeath().
+                        build());
+//---------------------------------------------------------------------
+
     }
 
 
@@ -689,7 +715,7 @@ public class Main extends AppCompatActivity implements View.OnClickListener {
                 u_submenu();
                 break;
 
-            case R.id.m_batch://批次新增
+            /*case R.id.m_batch://批次新增
                 int maxrec = 20;
                 Cursor c = mContRes.query(FriendsContentProvider.CONTENT_URI,
                         MYCOLUMN, null, null, null);
@@ -710,8 +736,8 @@ public class Main extends AppCompatActivity implements View.OnClickListener {
                 Toast.makeText(Main.this, msg, Toast.LENGTH_SHORT).show();
                 c.close();
                 setupViewComponent();//onCreate(null); // 重構
-                break;
-            case R.id.m_clear://清空資料
+                break;*/
+            /*case R.id.m_clear://清空資料
                 // 清空
                 MyAlertDialog aldDial = new MyAlertDialog(Main.this);
                 aldDial.getWindow().setBackgroundDrawableResource(R.color.Yellow);
@@ -724,7 +750,7 @@ public class Main extends AppCompatActivity implements View.OnClickListener {
                 aldDial.setButton(BUTTON_NEGATIVE, "取消清空", aldBtListener);
                 aldDial.show();
 
-                break;
+                break;*/
             case R.id.m_list://列表
                 btAdd.setVisibility(View.INVISIBLE);
                 btAbandon.setVisibility(View.VISIBLE);
@@ -746,9 +772,8 @@ public class Main extends AppCompatActivity implements View.OnClickListener {
                 u_submenu();
                 break;
 
-            case R.id.m_test:
-                it.setClass(Main.this,M1417test.class);
-                startActivity(it);
+            case R.id.m_mysql://匯入MySQL
+                dbmysql();
                 break;
 
             case R.id.action_settings:
@@ -765,6 +790,82 @@ public class Main extends AppCompatActivity implements View.OnClickListener {
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void dbmysql() {
+        //跟SQLite有關
+        mContRes = getContentResolver();
+        Cursor cur = mContRes.query(FriendsContentProvider.CONTENT_URI, MYCOLUMN, null, null, null);
+        cur.moveToFirst(); // 一定要寫，不然會出錯
+
+        try{
+            String result = DBConnector.executeQuery("SELECT * FROM member");//跟MySQLi有關
+            Log.d(TAG,result);
+            // 選擇讀取特定欄位
+            // String result = DBConnector.executeQuery("SELECT id,name FROM
+            // member");
+            /*******************************************************************************************
+             * SQL 結果有多筆資料時使用JSONArray 只有一筆資料時直接建立JSONObject物件 JSONObject
+             * jsonData = new JSONObject(result);
+             *******************************************************************************************/
+
+            JSONArray jsonArray = new JSONArray(result);
+
+            if (jsonArray.length()>0){//確認MySQL有無資料
+
+                Uri uri = FriendsContentProvider.CONTENT_URI;
+                mContRes.delete(uri, null, null); // 刪除SQLite所有資料
+
+                for (int i=0;  i<jsonArray.length(); i++){
+                    JSONObject jsonData = jsonArray.getJSONObject(i);
+                    //
+                    ContentValues newRow = new ContentValues();
+                    // --(1) 自動取的欄位
+                    // --取出 jsonObject
+                    // 每個欄位("key","value")-----------------------
+                    Iterator itt = jsonData.keys();
+                    while (itt.hasNext()) {
+                        String key = itt.next().toString();
+                        String value = jsonData.getString(key); // 取出欄位的值
+                        if (value == null) {
+                            continue;
+                        } else if ("".equals(value.trim())) {
+                            continue;
+                        } else {
+                            jsonData.put(key, value.trim());
+                        }
+                        // ------------------------------------------------------------------
+                        newRow.put(key, value.toString()); // 動態找出有幾個欄位
+                        // -------------------------------------------------------------------
+                        Log.d(TAG, "第" + i + "個欄位 key:" + key + " value:" + value);
+
+                    }
+
+                    // ---(2) 使用固定已知欄位---------------------------
+                    // newRow.put("id", jsonData.getString("id").toString());
+                    // newRow.put("name",
+                    // jsonData.getString("name").toString());
+                    // newRow.put("grp", jsonData.getString("grp").toString());
+                    // newRow.put("address", jsonData.getString("address")
+                    // .toString());
+
+                    //-------------------加入SQLite---------------------------------------
+                    mContRes.insert(FriendsContentProvider.CONTENT_URI, newRow);
+                    tvTitle.setTextColor(Color.BLUE);
+                    tvTitle.setText("顯示資料： 共加入" + Integer.toString(jsonArray.length()) + " 筆");
+
+                 }
+
+            }else {
+                Toast.makeText(Main.this, "主機資料庫無資料", Toast.LENGTH_LONG).show();
+            }
+
+        }catch (Exception e){
+            Log.e(TAG,e.toString());
+        }
+        cur.close();
+        setupViewComponent();//重構
+
     }
 
     private void u_submenu() {

@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class DBConnector {//非四大元件
     public static String executeQuery(String query_string) {
         String result = "";
-        String TAG = "oldpa=>";
+        String TAG = "tcnr01=>";
         try {
             HttpClient httpClient = new DefaultHttpClient();
 //-----------localhost--------

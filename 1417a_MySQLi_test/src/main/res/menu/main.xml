@@ -11,26 +11,26 @@
             android:id="@+id/m_query"
             android:orderInCategory="102"
             android:title="@string/m_query" />
-        <item
-            android:id="@+id/m_batch"
-            android:orderInCategory="105"
-            android:title="@string/m_batch"
-            android:visible="false" />
-        <item
-            android:id="@+id/m_clear"
-            android:orderInCategory="106"
-            android:title="@string/m_clear"
-            android:visible="false" />
+        <!--<item-->
+            <!--android:id="@+id/m_batch"-->
+            <!--android:orderInCategory="105"-->
+            <!--android:title="@string/m_batch"-->
+            <!--android:visible="false" />-->
+        <!--<item-->
+            <!--android:id="@+id/m_clear"-->
+            <!--android:orderInCategory="106"-->
+            <!--android:title="@string/m_clear"-->
+            <!--android:visible="false" />-->
         <item
             android:id="@+id/m_list"
             android:orderInCategory="107"
             android:title="@string/m_list" />
 
-        <item
-            android:id="@+id/m_test"
-            android:orderInCategory="108"
-            android:title="@string/m_test"
-            android:visible="false" />
+        <!--<item-->
+            <!--android:id="@+id/m_test"-->
+            <!--android:orderInCategory="108"-->
+            <!--android:title="@string/m_test"-->
+            <!--android:visible="false" />-->
 
         <item
             android:id="@+id/m_mysql"

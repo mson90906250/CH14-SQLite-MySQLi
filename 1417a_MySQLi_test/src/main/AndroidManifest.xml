@@ -20,7 +20,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".M1417test"></activity>
         <provider android:name=".providers.FriendsContentProvider" android:authorities="tw.tcnr01.m1417.providers.FriendsContentProvider"></provider>
     </application>
 
