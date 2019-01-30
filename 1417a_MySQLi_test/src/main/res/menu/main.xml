@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group android:id="@+id/m_group1">
+        <item
+            android:id="@+id/m_add"
+            android:orderInCategory="101"
+            android:title="@string/m_add" />
+        <item
+            android:id="@+id/m_query"
+            android:orderInCategory="102"
+            android:title="@string/m_query" />
+        <item
+            android:id="@+id/m_batch"
+            android:orderInCategory="105"
+            android:title="@string/m_batch" />
+        <item
+            android:id="@+id/m_clear"
+            android:orderInCategory="106"
+            android:title="@string/m_clear" />
+        <item
+            android:id="@+id/m_list"
+            android:orderInCategory="107"
+            android:title="@string/m_list" />
+
+        <item
+            android:id="@+id/m_test"
+            android:orderInCategory="107"
+            android:title="@string/m_test" />
+
+        <item
+            android:id="@+id/action_settings"
+            android:orderInCategory="999"
+            android:title="@string/action_settings"
+            app:showAsAction="never" />
+    </group>
+    <group android:id="@+id/m_group2" >
+        <item
+            android:id="@+id/m_return"
+            android:icon="@android:drawable/ic_menu_revert"
+            android:title="@string/action_settings"
+            android:orderInCategory="888"
+            app:showAsAction="always"/>
+    </group>
+
+
+
+</menu>
