@@ -14,11 +14,13 @@
         <item
             android:id="@+id/m_batch"
             android:orderInCategory="105"
-            android:title="@string/m_batch" />
+            android:title="@string/m_batch"
+            android:visible="false" />
         <item
             android:id="@+id/m_clear"
             android:orderInCategory="106"
-            android:title="@string/m_clear" />
+            android:title="@string/m_clear"
+            android:visible="false" />
         <item
             android:id="@+id/m_list"
             android:orderInCategory="107"
@@ -26,8 +28,14 @@
 
         <item
             android:id="@+id/m_test"
-            android:orderInCategory="107"
-            android:title="@string/m_test" />
+            android:orderInCategory="108"
+            android:title="@string/m_test"
+            android:visible="false" />
+
+        <item
+            android:id="@+id/m_mysql"
+            android:orderInCategory="109"
+            android:title="@string/m_mysql" />
 
         <item
             android:id="@+id/action_settings"
