@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Silver"
+    android:orientation="vertical"
+    tools:context=".M1416">
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textAllCaps="false"
+        android:layout_marginTop="20dp"
+        android:background="@android:drawable/btn_default"
+        android:text="@string/b001"/>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textAllCaps="false"
+        android:background="@android:drawable/btn_default"
+        android:text="@string/b002"/>
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textAllCaps="false"
+        android:background="@android:drawable/btn_default"
+        android:text="@string/b003"/>
+
+    <TableLayout
+        android:id="@+id/user_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.91"
+        android:background="@color/Yellow"
+        android:scrollbarAlwaysDrawVerticalTrack="false"
+        android:scrollbars="horizontal"/>
+</LinearLayout>

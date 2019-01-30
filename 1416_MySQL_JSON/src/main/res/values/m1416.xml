@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="t001">訊息</string>
+    <string name="b001">讀Table-member</string>
+    <string name="b002">讀Table-area</string>
+    <string name="b003">讀member Join area</string>
+
+
+</resources>
