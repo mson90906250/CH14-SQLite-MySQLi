@@ -1,0 +1,634 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rel3"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Silver"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingStart="@dimen/activity_horizontal_margin"
+    android:paddingEnd="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".Main">
+
+    <LinearLayout
+        android:id="@+id/linear02"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/count_t"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btidcancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btidcancel"
+            android:textAlignment="center"
+            android:textColor="@color/Red"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/subTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/Aqua"
+            android:text="@string/tvIdTitle"
+            android:textSize="14sp" />
+
+        <!--使listview可以更新-->
+        <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/laySwipe"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ListView
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/White" />
+        </android.support.v4.widget.SwipeRefreshLayout>
+        <!---->
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative01"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/count_t"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <Spinner
+            android:id="@+id/spnName"
+            style="@style/AppTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp"
+            android:alwaysDrawnWithCache="true"
+            android:background="@android:drawable/btn_dropdown"
+            android:dropDownWidth="match_parent"
+            android:keepScreenOn="true"
+            android:popupBackground="@color/Yellow"
+            android:prompt="@string/prompt_select_name" />
+
+        <TextView
+            android:id="@+id/tvIdTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/spnName"
+            android:layout_alignParentStart="true"
+            android:text="@string/tvIdTitle"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/Navy"
+            android:textSize="18sp"
+            tools:background="@color/Teal" />
+
+        <TextView
+            android:id="@+id/txtid"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvIdTitle"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
+            android:text="@string/txtid"
+            android:textColor="@color/Red"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edid"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/txtid"
+            android:layout_alignBottom="@+id/txtid"
+            android:layout_toEndOf="@+id/txtid"
+            android:background="@color/Yellow"
+            android:enabled="false"
+            android:hint="@string/hint"
+            android:textColor="@color/Red" />
+
+        <TextView
+            android:id="@+id/tvname"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtid"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
+            android:text="@string/tv001"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edtName"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tvname"
+            android:layout_alignBottom="@+id/tvname"
+            android:layout_toEndOf="@+id/tvname"
+            android:background="@color/White"
+            android:hint="@string/hint" />
+
+        <TextView
+            android:id="@+id/tvgrp"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvname"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
+            android:text="@string/tv002"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edtGrp"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edtName"
+            android:layout_alignBaseline="@+id/tvgrp"
+            android:layout_alignBottom="@+id/tvgrp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/tvgrp"
+            android:background="@color/White"
+            android:hint="@string/hint" />
+
+        <TextView
+            android:id="@+id/tvaddress"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvgrp"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
+            android:text="@string/tv003"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edtAddr"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tvaddress"
+            android:layout_alignBottom="@+id/tvaddress"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/tvaddress"
+            android:background="@color/White"
+            android:hint="@string/hint" />
+
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="90dp"
+            android:layout_marginTop="240dp"
+            android:background="@android:drawable/btn_default"
+            android:text="@string/btnadd"
+            android:textSize="18sp"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/btnabandon"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="180dp"
+            android:layout_marginTop="240dp"
+            android:background="@android:drawable/btn_default"
+            android:text="@string/btnabandon"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btnupdate"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="240dp"
+            android:background="@android:drawable/btn_default"
+            android:text="@string/btnupdate"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btnquery"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="240dp"
+            android:background="@android:drawable/btn_default"
+            android:text="@string/btnquery"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btnlist"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="240dp"
+            android:background="@android:drawable/btn_default"
+            android:text="@string/btnreport"
+            android:textColor="@color/Red"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btIdDel"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="180dp"
+            android:layout_marginTop="240dp"
+            android:background="@android:drawable/btn_default"
+            android:text="@string/btndel"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btIdtop"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="290dp"
+            android:background="@android:drawable/btn_default"
+            android:text="@string/btIdtop"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btIdPrev"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="90dp"
+            android:layout_marginTop="290dp"
+            android:background="@android:drawable/btn_default"
+            android:text="@string/btIdPrev"
+            android:textSize="18sp"
+            tools:text="@string/btIdPrev" />
+
+        <Button
+            android:id="@+id/btIdNext"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="170dp"
+            android:layout_marginTop="290dp"
+            android:background="@android:drawable/btn_default"
+            android:text="@string/btIdnext"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btIdend"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="250dp"
+            android:layout_marginTop="290dp"
+            android:background="@android:drawable/btn_default"
+            android:text="@string/btIdend"
+            android:textSize="18sp" />
+
+
+        <!-- 左 -->
+        <TextView
+            android:id="@+id/rt01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/rt04"
+            android:layout_marginStart="@dimen/pa01"
+            android:background="@android:drawable/ic_media_rew"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <!-- 右 -->
+        <TextView
+            android:id="@+id/rt02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/rt04"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/pa01"
+            android:background="@android:drawable/ic_media_ff"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <!-- 上 -->
+        <TextView
+            android:id="@+id/rt03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="160dp"
+            android:layout_marginBottom="110dp"
+            android:background="@android:drawable/arrow_up_float"
+            android:textSize="24sp" />
+
+        <!-- 下 -->
+        <TextView
+            android:id="@+id/rt04"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="160dp"
+            android:layout_marginBottom="30dp"
+            android:background="@android:drawable/arrow_down_float"
+            android:textSize="24sp" />
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/count_t"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="1dp"
+        android:text="@string/count_t"/>
+
+    <TextView
+        android:id="@+id/myname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="160sp"
+        android:layout_toEndOf="@+id/count_t"
+        android:text="@string/myname"
+        android:textColor="@color/Blue" />
+
+</RelativeLayout>
+
+
+
+
+<!--
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rel3"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Silver"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    >
+
+    <Spinner
+        android:id="@+id/spnName"
+        style="@style/AppTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="5dp"
+        android:alwaysDrawnWithCache="true"
+        android:background="@android:drawable/btn_dropdown"
+        android:dropDownWidth="match_parent"
+        android:keepScreenOn="true"
+        android:popupBackground="@color/Yellow"
+        android:prompt="@string/prompt_select_name"/>
+
+    <TextView
+        android:id="@+id/tvIdTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spnName"
+        android:layout_marginTop="10dp"
+        android:text="@string/tvIdTitle"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/Navy"
+        android:textSize="18sp"
+        tools:background="@color/Teal"
+        />
+
+
+    <TextView
+        android:id="@+id/TextView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/edid"
+        android:layout_marginTop="10dp"
+        android:text="@string/tv001"
+        android:textSize="18sp"/>
+
+    <EditText
+        android:id="@+id/edtName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/TextView1"
+        android:layout_alignBottom="@+id/TextView1"
+        android:layout_toEndOf="@+id/TextView1"
+        android:background="@color/White"
+        android:hint="@string/hint"
+        android:inputType=""
+        android:autofillHints="" tools:targetApi="o"/>
+
+    <TextView
+        android:id="@+id/TextView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/edtName"
+        android:layout_marginTop="10dp"
+        android:text="@string/tv002"
+        android:textSize="18sp"/>
+
+    <EditText
+        android:id="@+id/edtGrp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edtName"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/TextView2"
+        android:background="@color/White"
+        android:hint="@string/hint"
+        android:inputType=""
+        android:autofillHints="" tools:targetApi="o"/>
+
+    <TextView
+        android:id="@+id/TextView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/TextView2"
+        android:layout_marginTop="10dp"
+        android:text="@string/tv003"
+        android:textSize="18sp"/>
+
+    <EditText
+        android:id="@+id/edtAddr"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edtGrp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/TextView3"
+        android:background="@color/White"
+        android:hint="@string/hint"
+        android:inputType=""
+        android:autofillHints="" tools:targetApi="o"/>
+
+
+    <TextView
+        android:id="@+id/count_t"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:text="@string/count_t"/>
+
+
+    <Button
+        android:id="@+id/btIdtop"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/TextView3"
+        android:layout_marginTop="20dp"
+        android:background="@android:drawable/btn_default"
+        android:onClick="btIdtop"
+        android:text="@string/btIdtop"
+        android:textSize="18sp"/>
+
+    <Button
+        android:id="@+id/btIdPrev"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btIdtop"
+        android:layout_alignBottom="@+id/btIdtop"
+        android:layout_toEndOf="@+id/btIdtop"
+        android:background="@android:drawable/btn_default"
+        android:onClick="btIdPrev"
+        android:text="@string/btIdPrev"
+        android:textSize="18sp"
+        tools:text="@string/btIdPrev"/>
+
+    <Button
+        android:id="@+id/btIdNext"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btIdPrev"
+        android:layout_alignBottom="@+id/btIdPrev"
+        android:layout_toEndOf="@+id/btIdPrev"
+        android:background="@android:drawable/btn_default"
+        android:onClick="btIdNext"
+        android:text="@string/btIdnext"
+        android:textSize="18sp"/>
+
+    <Button
+        android:id="@+id/btIdend"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btIdNext"
+        android:layout_toEndOf="@+id/btIdNext"
+        android:background="@android:drawable/btn_default"
+        android:onClick="btIdend"
+        android:text="@string/btIdend"
+        android:textSize="18sp"/>
+
+    &lt;!&ndash; 左 &ndash;&gt;
+    <TextView
+        android:id="@+id/rt01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/ic_media_rew"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_above="@+id/rt04"
+        android:layout_alignParentStart="true"/>
+
+    &lt;!&ndash; 右 &ndash;&gt;
+    <TextView
+        android:id="@+id/rt02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/ic_media_ff"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_above="@+id/rt04"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"/>
+
+    &lt;!&ndash; 上 &ndash;&gt;
+    <TextView
+        android:id="@+id/rt03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/arrow_up_float"
+        android:textSize="24sp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/btIdDel"
+        android:layout_toEndOf="@+id/btIdPrev"/>
+
+    &lt;!&ndash; 下 &ndash;&gt;
+    <TextView
+        android:id="@+id/rt04"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/arrow_down_float"
+        android:textSize="24sp"
+        android:layout_above="@+id/count_t"
+        android:layout_marginBottom="30dp"
+        android:layout_alignStart="@+id/rt03"/>
+    <Button
+        android:id="@+id/btnupdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btIdtop"
+        android:layout_toStartOf="@+id/btIdDel"
+        android:background="@android:drawable/btn_default"
+        android:text="@string/btnupdate"
+        android:textSize="18sp"/>
+
+    <Button
+        android:id="@+id/btIdDel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnupdate"
+        android:layout_alignBottom="@+id/btnupdate"
+        android:layout_toStartOf="@+id/btIdend"
+        android:background="@android:drawable/btn_default"
+        android:text="@string/btndel"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:id="@+id/txtid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tvIdTitle"
+        android:layout_marginTop="10dp"
+        android:layout_toStartOf="@+id/edid"
+        android:text="@string/txtid"
+        android:textColor="@color/Red"
+        android:textSize="18sp"/>
+
+    <EditText
+        android:id="@+id/edid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/txtid"
+        android:layout_alignBottom="@+id/txtid"
+        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/edtName"
+        android:background="@color/White"
+        android:ems="10"
+        android:hint="@string/hint"
+        android:inputType="textPersonName"
+        android:textColor="@color/Red"
+        android:autofillHints="" tools:targetApi="o"/>
+
+</RelativeLayout>-->
