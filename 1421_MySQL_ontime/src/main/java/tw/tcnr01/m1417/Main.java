@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.media.AudioManager;
+import android.media.ToneGenerator;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -30,6 +32,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -42,7 +46,7 @@ import java.util.Map;
 import tw.tcnr01.m1417.providers.FriendsContentProvider;
 
 
-public class Main extends AppCompatActivity implements View.OnClickListener {
+public class Main extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     String TAG = "tcnr01=>";
     private TextView count_t;
     private EditText e001, e002, e003, e004;
@@ -65,7 +69,7 @@ public class Main extends AppCompatActivity implements View.OnClickListener {
     int ran = 60; // 兩點角度
     private Button btEdit, btDel;
     private EditText b_edid;
-    String tname, tgrp, taddr;
+    String tname, tgrp, taddr,taddress;
     private Spinner mSpnName;
     int up_item = 0;
     //------------------------------
@@ -91,6 +95,15 @@ public class Main extends AppCompatActivity implements View.OnClickListener {
     private boolean flag; //關閉ontuchevent
     //-----------------------------------------
     private SwipeRefreshLayout laySwipe;
+    private String s_id;
+
+    // ----------定時更新--------------------------------
+    private Long startTime;
+    private Handler handler = new Handler();
+
+    int autotime = 30;// 要幾秒的時間 更新匯入MySQL資料
+    // ------------------
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -182,6 +195,17 @@ public class Main extends AppCompatActivity implements View.OnClickListener {
         //-----------------
         mSpnName = (Spinner) this.findViewById(R.id.spnName);
         //---------------------
+
+        // -------------------------
+        // 取得目前時間
+        startTime = System.currentTimeMillis();
+        // 設定Delay的時間
+        handler.postDelayed(updateTimer, 10000); // 延遲
+        // ---------------------------------------
+        sqliteupdate(); // 抓取SQLite資料
+
+// ----------------------------------------
+
         recSet = u_selectdb(myselection, myargs, myorder);
         u_setspinner();
         //---------------------------------
@@ -272,7 +296,6 @@ public class Main extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         int rowsAffected;
         Uri uri;
-        String s_id;
         String whereClause;
         String[] selectionArgs;
         //---------------------------
@@ -295,7 +318,12 @@ public class Main extends AppCompatActivity implements View.OnClickListener {
                 uri = FriendsContentProvider.CONTENT_URI;
                 ContentValues contVal = new ContentValues();
                 contVal = FillRec();
+
                 s_id = b_edid.getText().toString().trim();
+                tname = e001.getText().toString().trim();
+                tgrp = e002.getText().toString().trim();
+                taddress = e003.getText().toString().trim();
+
                 whereClause = "id='" + s_id + "'";
                 selectionArgs = null;
                 rowsAffected = mContRes.update(uri, contVal, whereClause, selectionArgs);
@@ -308,6 +336,11 @@ public class Main extends AppCompatActivity implements View.OnClickListener {
                     setupViewComponent();
                     showRec(index);
                 }
+
+                //-------------------------------------
+                mysql_update(); // 執行MySQL更新
+                //-------------------------------------
+
                 Toast.makeText(getApplication(), msg, Toast.LENGTH_SHORT).show();
                 break;
             //------------------------------------
@@ -333,6 +366,11 @@ public class Main extends AppCompatActivity implements View.OnClickListener {
                     setupViewComponent();
                     showRec(index);
                 }
+
+                // ---------------------------
+                mysql_del();// 執行MySQL刪除
+                // ---------------------------
+
                 Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
                 break;
             //-----------------------
@@ -342,6 +380,11 @@ public class Main extends AppCompatActivity implements View.OnClickListener {
                 tname = e001.getText().toString().trim();
                 tgrp = e002.getText().toString().trim();
                 taddr = e003.getText().toString().trim();
+
+                //-------直接增加到MySQL-------------------------------
+                mysql_insert();
+                //----------------------------------------
+
                 if (tname.equals("") || tgrp.equals("")) {
                     Toast.makeText(getApplicationContext(), "資料空白無法新增 !", Toast.LENGTH_SHORT).show();
                     return;
@@ -362,8 +405,9 @@ public class Main extends AppCompatActivity implements View.OnClickListener {
                     index = 0;
                     return;
                 }
-                ;
                 c_add.close();
+                //匯入MySQL
+                dbmysql();
                 setupViewComponent();
                 break;
             //------------------------------------
@@ -675,6 +719,53 @@ public class Main extends AppCompatActivity implements View.OnClickListener {
         Toast.makeText(getApplication(), "禁用返回鍵", Toast.LENGTH_SHORT).show();
     }
 
+    //-------------------------------------------------------
+    private void mysql_insert() {
+        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+
+        nameValuePairs.add(new BasicNameValuePair("name", tname));
+        nameValuePairs.add(new BasicNameValuePair("grp", tgrp));
+        nameValuePairs.add(new BasicNameValuePair("address", taddr));
+
+        try {
+            Thread.sleep(500);//延遲Thread 睡眠0.5秒
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        //-----------------------------------------------
+        String result = DBConnector.executeInsert("SELECT * FROM member", nameValuePairs);
+        //-----------------------------------------------
+
+
+
+    }
+//-------------------------------------------------
+
+    private void mysql_update() {
+
+        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+        nameValuePairs.add(new BasicNameValuePair("id", s_id ));
+        nameValuePairs.add(new BasicNameValuePair("name", tname));
+        nameValuePairs.add(new BasicNameValuePair("grp", tgrp));
+        nameValuePairs.add(new BasicNameValuePair("address", taddress));
+        String result = DBConnector.executeUpdate("SELECT * FROM member", nameValuePairs);
+
+        //匯入MySQL
+        dbmysql();
+    }
+
+    private void mysql_del() {
+        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+        nameValuePairs.add(new BasicNameValuePair("id", s_id));
+        String result = DBConnector.executeDelet("DELETE From member ", nameValuePairs);
+
+        //匯入MySQL
+        dbmysql();
+    }
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
@@ -790,7 +881,61 @@ public class Main extends AppCompatActivity implements View.OnClickListener {
         return super.onOptionsItemSelected(item);
     }
 
+    // 固定要執行的方法
+    private Runnable updateTimer = new Runnable() {
+        @Override
+        public void run() {
+            handler.postDelayed(this, autotime * 1000); // 真正延遲的時間
+            // -------執行匯入MySQL
+            dbmysql();
+            // -------
+        }
+    };
+
+    private void sqliteupdate() {//重新產生下拉功能表
+        mContRes = getContentResolver();
+        Cursor c = mContRes.query(FriendsContentProvider.CONTENT_URI, MYCOLUMN, null, null, null);
+        c.moveToFirst(); // 一定要寫，不然會出錯
+        tcount = c.getCount();
+        // ---------------------------
+        tvTitle.setTextColor(Color.BLUE);
+        tvTitle.setText("顯示資料： 共" + tcount + " 筆");
+        b_edid.setTextColor(ContextCompat.getColor(this,R.color.Red));
+        // -------------------------
+        // ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+        // android.R.layout.simple_spinner_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
+
+        for (int i = 0; i < tcount; i++) {
+            c.moveToPosition(i);
+            adapter.add(c.getString(0) + "-" + c.getString(1) + "," + c.getString(2) + "," + c.getString(3));
+        }
+        c.close();
+
+        // adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        mSpnName.setAdapter(adapter);
+        mSpnName.setOnItemSelectedListener(mSpnNameOnItemSelLis);
+        mSpnName.setSelection(up_item, true); //spinner 小窗跳到第幾筆
+
+        //------ 宣告鈴聲 ---------------------------
+	         ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_ALARM, 100); // 100=max
+	         toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_NETWORK_LITE, 1000);
+	         toneG.release();
+	         //-----------------------------------------
+
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacks(updateTimer);
+    }
+
     private void dbmysql() {
+
+
         //跟SQLite有關
         mContRes = getContentResolver();
         Cursor cur = mContRes.query(FriendsContentProvider.CONTENT_URI, MYCOLUMN, null, null, null);
@@ -806,6 +951,38 @@ public class Main extends AppCompatActivity implements View.OnClickListener {
              * SQL 結果有多筆資料時使用JSONArray 只有一筆資料時直接建立JSONObject物件 JSONObject
              * jsonData = new JSONObject(result);
              *******************************************************************************************/
+
+            String r = result.toString().trim();
+            //以下程式碼一定要放在前端藍色程式碼執行之後，才能取得狀態碼
+            //存取類別成員 DBConnector.httpstate 判定是否回應 200(連線要求成功)
+            Log.d(TAG, "httpstate="+DBConnector.httpstate );
+            if (DBConnector.httpstate == 200) {
+                Uri uri = FriendsContentProvider.CONTENT_URI;
+                mContRes.delete(uri, null, null);
+                Toast.makeText(getBaseContext(), "已經完成由伺服器會入資料",
+                        Toast.LENGTH_LONG).show();
+            } else {
+                int checkcode=DBConnector.httpstate/100;
+                switch(checkcode){
+                    case 1:
+                    msg="資訊回應(code:"+DBConnector.httpstate+")";
+                    break;
+                    case 2:
+                    msg="已經完成由伺服器會入資料(code:"+DBConnector.httpstate+")";
+                    break;
+                    case 3:
+                    msg="伺服器重定向訊息，請稍後在試(code:"+DBConnector.httpstate+")";
+                    break;
+                    case 4:
+                    msg="用戶端錯誤回應，請稍後在試(code:"+DBConnector.httpstate+")";
+                    break;
+                    case 5:
+                    msg="伺服器errorresponses，請稍後在試(code:"+DBConnector.httpstate+")";
+                    break;
+                }
+                Toast.makeText(getBaseContext(),msg,Toast.LENGTH_LONG).show();
+            }
+
 
             JSONArray jsonArray = new JSONArray(result);
 
@@ -862,7 +1039,10 @@ public class Main extends AppCompatActivity implements View.OnClickListener {
             Log.e(TAG,e.toString());
         }
         cur.close();
-        setupViewComponent();//重構
+
+        sqliteupdate();
+
+       // setupViewComponent();//重構
 
     }
 
@@ -872,5 +1052,15 @@ public class Main extends AppCompatActivity implements View.OnClickListener {
         menu.setGroupVisible(R.id.m_group2, true);
 //        mSpnName.setVisibility(View.GONE);
         mSpnName.setEnabled(false);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

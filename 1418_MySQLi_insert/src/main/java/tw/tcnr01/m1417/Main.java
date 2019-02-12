@@ -30,6 +30,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -342,6 +344,11 @@ public class Main extends AppCompatActivity implements View.OnClickListener {
                 tname = e001.getText().toString().trim();
                 tgrp = e002.getText().toString().trim();
                 taddr = e003.getText().toString().trim();
+
+                //-------直接增加到MySQL-------------------------------
+                mysql_insert();
+                //----------------------------------------
+
                 if (tname.equals("") || tgrp.equals("")) {
                     Toast.makeText(getApplicationContext(), "資料空白無法新增 !", Toast.LENGTH_SHORT).show();
                     return;
@@ -362,8 +369,9 @@ public class Main extends AppCompatActivity implements View.OnClickListener {
                     index = 0;
                     return;
                 }
-                ;
                 c_add.close();
+                //匯入MySQL
+                dbmysql();
                 setupViewComponent();
                 break;
             //------------------------------------
@@ -675,6 +683,30 @@ public class Main extends AppCompatActivity implements View.OnClickListener {
         Toast.makeText(getApplication(), "禁用返回鍵", Toast.LENGTH_SHORT).show();
     }
 
+    //-------------------------------------------------------
+    private void mysql_insert() {
+        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+
+        nameValuePairs.add(new BasicNameValuePair("name", tname));
+        nameValuePairs.add(new BasicNameValuePair("grp", tgrp));
+        nameValuePairs.add(new BasicNameValuePair("address", taddr));
+
+        try {
+            Thread.sleep(500);//延遲Thread 睡眠0.5秒
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        //-----------------------------------------------
+        String result = DBConnector.executeInsert("SELECT * FROM member", nameValuePairs);
+        //-----------------------------------------------
+
+
+
+    }
+//-------------------------------------------------
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
@@ -791,6 +823,8 @@ public class Main extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void dbmysql() {
+
+
         //跟SQLite有關
         mContRes = getContentResolver();
         Cursor cur = mContRes.query(FriendsContentProvider.CONTENT_URI, MYCOLUMN, null, null, null);

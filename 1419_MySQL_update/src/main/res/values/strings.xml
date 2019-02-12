@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">14.19 MySQL-update</string>
+    <string name="action_settings">結束</string>
+    <string name="myname">1號林繨菖</string>
+    <string name="m_return">返回</string>
+    <string name="m_insert">請填入資料</string>
+    <string name="hint">請輸入</string>
+
+</resources>

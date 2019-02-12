@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="t001">資料表清單</string>
+    <string name="m_add">新增</string>
+    <string name="m_query">查詢</string>
+    <string name="m_update">編輯刪除</string>
+    <string name="m_delete">刪除</string>
+    <string name="btnadd">新增</string>
+    <string name="btnquery">查詢</string>
+    <string name="btnlist">清單</string>
+    <string name="btndel">刪除</string>
+    <string name="btnupdate">更新</string>
+    <string name="tv001">姓名：</string>
+    <string name="tv002">群組：</string>
+    <string name="tv003">地址：</string>
+    <string name="count_t">共計:</string>
+
+    <string name="btIdnext">下一筆</string>
+    <string name="btIdPrev">上一筆</string>
+    <string name="tvIdTitle">資料內容</string>
+    <string name="btIdtop">首筆</string>
+    <string name="btIdend">尾筆</string>
+    <string name="m_batch">批次新增</string>
+    <string name="m_clear">清空資料</string>
+
+    <string name="txtid">ID   :</string>
+
+    <string name="m_list">列表清單</string>
+
+    <string name="m_spinner">下拉選單</string>
+    <string name="prompt_select_name">請選擇好友</string>
+    <string name="btnabandon">放棄</string>
+    <string name="btidcancel">結束列表</string>
+    <string name="btnreport">顯示列表</string>
+
+    <string name="m_mysql">匯入MySQL</string>
+    <string name="m_test">測試</string>
+    <string name="btn_test">讀取MySQL資料</string>
+
+    <string name="b001">讀Table-member</string>
+    <string name="b002">讀Table-area</string>
+    <string name="b003">讀member Join area</string>
+
+
+</resources>
