@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rel3"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Silver"
+    android:padding="@dimen/Margins"
+    tools:context=".Main">
+
+    <RelativeLayout
+        android:id="@+id/relative01"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Spinner
+            android:id="@+id/spnName"
+            style="@style/AppTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp"
+            android:alwaysDrawnWithCache="true"
+            android:background="@android:drawable/btn_dropdown"
+            android:dropDownWidth="match_parent"
+            android:keepScreenOn="true"
+            android:prompt="@string/prompt_select_name" />
+
+        <TextView
+            android:id="@+id/tvIdTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/spnName"
+            android:layout_marginTop="5sp"
+            android:text="@string/tvIdTitle"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/Navy"
+            android:textSize="14sp"
+            tools:background="@color/Teal" />
+
+        <TextView
+            android:id="@+id/txtid"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tvIdTitle"
+            android:layout_marginTop="5dp"
+            android:text="@string/txtid"
+            android:textColor="@color/Red"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edid"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/txtid"
+            android:layout_alignBottom="@+id/txtid"
+            android:layout_toEndOf="@+id/txtid"
+            android:background="@color/Yellow"
+            android:enabled="false"
+            android:hint="@string/hint"
+            android:inputType="text"
+            android:textColor="@color/Red" />
+
+        <TextView
+            android:id="@+id/tvname"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/txtid"
+            android:layout_marginTop="5dp"
+            android:text="@string/tv001"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edtName"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tvname"
+            android:layout_alignBottom="@+id/tvname"
+            android:layout_toEndOf="@+id/tvname"
+            android:background="@color/White"
+            android:hint="@string/hint"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/tvgrp"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tvname"
+            android:layout_marginTop="5dp"
+            android:text="@string/tv002"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edtGrp"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tvgrp"
+            android:layout_alignBottom="@+id/tvgrp"
+            android:layout_below="@+id/edtName"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/tvgrp"
+            android:background="@color/White"
+            android:hint="@string/hint"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/tvaddress"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tvgrp"
+            android:layout_marginTop="5dp"
+            android:text="@string/tv003"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edtAddr"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tvaddress"
+            android:layout_alignBottom="@+id/tvaddress"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/tvaddress"
+            android:background="@color/White"
+            android:hint="@string/hint"
+            android:inputType="text" />
+
+        <Button
+            android:id="@+id/btIdtop"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="310dp"
+            android:background="@android:drawable/btn_default"
+            android:text="@string/btIdtop"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btIdPrev"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="90dp"
+            android:layout_marginTop="310dp"
+            android:background="@android:drawable/btn_default"
+            android:text="@string/btIdPrev"
+            android:textSize="18sp"
+            tools:text="@string/btIdPrev" />
+
+        <Button
+            android:id="@+id/btIdNext"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="170dp"
+            android:layout_marginTop="310dp"
+            android:background="@android:drawable/btn_default"
+            android:text="@string/btIdnext"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btIdend"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="250dp"
+            android:layout_marginTop="310dp"
+            android:background="@android:drawable/btn_default"
+            android:text="@string/btIdend"
+            android:textSize="18sp" />
+        <!-- 左 -->
+        <TextView
+            android:id="@+id/rt01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/now_time"
+            android:layout_alignEnd="@+id/btIdPrev"
+            android:layout_marginBottom="50sp"
+            android:layout_marginEnd="100sp"
+            android:background="@android:drawable/ic_media_rew"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <!-- 右 -->
+        <TextView
+            android:id="@+id/rt02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/now_time"
+            android:layout_marginBottom="50sp"
+            android:layout_marginStart="100sp"
+            android:layout_toEndOf="@+id/rt04"
+            android:background="@android:drawable/ic_media_ff"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <!-- 上 -->
+        <TextView
+            android:id="@+id/rt03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/rt04"
+            android:layout_alignStart="@+id/rt04"
+            android:layout_marginBottom="70sp"
+            android:background="@android:drawable/arrow_up_float"
+            android:textSize="24sp" />
+
+        <!-- 下 -->
+        <TextView
+            android:id="@+id/rt04"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="20sp"
+            android:layout_marginStart="160dp"
+            android:background="@android:drawable/arrow_down_float"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/now_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="1dp"
+            android:alpha="0.75"
+            android:background="@color/Yellow"
+            android:text="@string/now_time"
+            android:textColor="@color/Navy"
+            android:visibility="visible" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/Relbutton"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="250dp">
+
+
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="90dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:drawable/btn_default"
+            android:text="@string/btnadd"
+            android:textSize="18sp"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/btnabandon"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="180dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:drawable/btn_default"
+            android:text="@string/btnabandon"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btnupdate"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:drawable/btn_default"
+            android:text="@string/btnupdate"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btnquery"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:drawable/btn_default"
+            android:text="@string/btnquery"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btnlist"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:drawable/btn_default"
+            android:text="@string/btnreport"
+            android:textColor="@color/Red"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btIdDel"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="180dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:drawable/btn_default"
+            android:text="@string/btndel"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/linear02"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <Button
+            android:id="@+id/btidcancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btidcancel"
+            android:textAlignment="center"
+            android:textColor="@color/Red"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/subTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/Aqua"
+            android:text="@string/tvIdTitle"
+            android:textSize="14sp" />
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/White" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/edit_on"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="1dp"
+        android:alpha="0.5"
+        android:background="@android:drawable/picture_frame"
+        android:text="@string/edit_on"
+        android:textColor="@color/Red"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/count_t"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="30sp"
+        android:text="@string/count_t" />
+
+    <TextView
+        android:id="@+id/myname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30sp"
+        android:layout_marginStart="160sp"
+        android:layout_toEndOf="@+id/count_t"
+        android:text="@string/myname"
+        android:textColor="@color/Blue" />
+
+</RelativeLayout>
