@@ -641,8 +641,12 @@ public class Main extends AppCompatActivity implements View.OnClickListener, Ada
                 brelative01.setVisibility(View.VISIBLE);
                 blinear02.setVisibility(View.INVISIBLE);
                 b_Relbutton.setVisibility(View.VISIBLE);
-                setupViewComponent();
+                old_index = mSpnName.getSelectedItemPosition();
                 u_menu_main();
+                edittype = false;
+                dbmysql();
+                setupViewComponent();
+                u_spinmove(old_index);//spinner 小窗跳到第幾筆
                 break;
         }
     }
