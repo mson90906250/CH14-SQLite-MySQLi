@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="t001">path:</string>
+    <string name="t002">title</string>
+    <string name="t1">音樂文件名:</string>
+    <string name="t2">歌名:</string>
+    <string name="t3">專輯名:</string>
+    <string name="t4">作者:</string>
+    <string name="t5">文件路徑:</string>
+
+
+</resources>

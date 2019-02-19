@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="t001">c1</string>
+    <string name="t002">c2</string>
+    <string name="t003">c3</string>
+    <string name="t004">c4</string>
+    <string name="t005">c5</string>
+    <string name="noPermission">直到取得權限, 否則無法顯示聯絡人資料</string>
+    <string name="t1">編號</string>
+    <string name="t2">姓名</string>
+    <string name="t3">電話</string>
+    <string name="t4">e-mail</string>
+    <string name="t5">地址</string>
+
+</resources>
